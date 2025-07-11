@@ -2,9 +2,9 @@ name: 'Terraform CI/CD'
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 env:
   TF_VERSION: '1.11.0'
@@ -104,7 +104,7 @@ jobs:
     name: 'Deploy'
     runs-on: ubuntu-latest
     needs: [validate, security]
-    if: github.ref == 'refs/heads/main' && needs.validate.outputs.changes == 'true'
+    if: github.ref == 'refs/heads/master' && needs.validate.outputs.changes == 'true'
     environment: production
     
     steps:
