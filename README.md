@@ -8,7 +8,6 @@ This repository contains the complete infrastructure-as-code setup for managing 
 - **Terragrunt** for DRY configuration and state management
 - **Terraform** for resource provisioning (latest version >= 1.6.0)
 - **GitHub Actions** for CI/CD
-- **Pre-commit hooks** for code quality
 
 ## Structure
 
@@ -29,40 +28,6 @@ This repository contains the complete infrastructure-as-code setup for managing 
 - Terraform >= 1.10.0 (required for S3 native state locking)
 - Terragrunt >= 0.50.0
 - Pre-commit hooks installed
-
-## Quick Start
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd slate-tf
-   ```
-
-2. **Install dependencies**
-   ```bash
-   make install
-   ```
-
-3. **Set up the state backend**
-   ```bash
-   ./scripts/setup-state-backend.sh
-   ```
-
-4. **Configure billing alerts**
-   Edit `billing-alert/terragrunt.hcl` and update the email addresses:
-   ```hcl
-   alert_emails = [
-     "your-email@company.com",
-     "finance@company.com"
-   ]
-   ```
-
-5. **Initialize and deploy the billing alerts**
-   ```bash
-   make init           # Initialize terragrunt configurations
-   make plan-billing   # Review the plan
-   make apply-billing  # Apply the changes
-   ```
 
 ## State Management
 
@@ -89,17 +54,6 @@ make apply-billing  # Apply billing alert changes only
 make clean          # Clean up temporary files
 ```
 
-## First Component: Billing Alerts
-
-The billing alert module creates:
-- **SNS Topic** for notifications
-- **CloudWatch Alarms** for billing thresholds
-- **Email Subscriptions** for alerts
-
-Default thresholds:
-- Warning: $50
-- Critical: $80
-- Total Account: $100
 
 ## Development Workflow
 
@@ -112,7 +66,6 @@ Default thresholds:
 
 ## Security Features
 
-- Pre-commit hooks for security scanning
 - Checkov security analysis in CI
 - State encryption at rest
 - Least privilege IAM policies
@@ -150,19 +103,3 @@ The workflow will:
 - Check the `modules/*/README.md` for module-specific documentation
 - Review GitHub Actions logs for CI/CD issues
 - Validate AWS permissions for your user/role
-
-
-
-## Next Steps
-
-After setting up billing alerts, consider adding:
-- VPC and networking resources
-- Security groups and NACLs
-- EC2 instances or container services
-- RDS or other data services
-- CloudFront distributions
-- Route53 DNS records
-
-## Support
-
-For questions or issues, please create an issue in this repository. 
