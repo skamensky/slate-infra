@@ -7,7 +7,8 @@ resource "aws_sns_topic" "billing_alerts" {
   display_name = "Billing Alerts"
 
   tags = merge(var.tags, {
-    Name = "${var.project_name}-billing-alerts"
+    Name = "${var.project_name}-billing-alerts",
+    Test = "tag"
   })
 }
 
